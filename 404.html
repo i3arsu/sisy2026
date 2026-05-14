@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Page not found — SISY 2026</title>
+<meta name="description" content="The page you're looking for doesn't exist. SISY 2026 — Pula, Croatia." />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles.css" />
+<style>
+  .nope {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(180deg, #0d3253 0%, #0a2f4a 60%, #061d33 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 120px 0 60px;
+  }
+  .nope::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(250,245,230,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(250,245,230,0.04) 1px, transparent 1px);
+    background-size: 96px 96px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 85%);
+    pointer-events: none;
+  }
+  .nope > .container { position: relative; z-index: 1; }
+  .nope .code {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(8rem, 24vw, 22rem);
+    line-height: 0.85;
+    letter-spacing: -0.06em;
+    color: var(--foam);
+    opacity: 0.18;
+    margin: 0 0 -40px;
+  }
+  .nope h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--paper);
+    max-width: 16ch;
+  }
+  .nope h1 em { color: var(--foam); font-style: italic; font-weight: 400; }
+  .nope p { color: rgba(250,245,230,0.78); max-width: 540px; margin: 24px 0 36px; font-size: 1.05rem; }
+  .nope .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .waves-bottom {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 80px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1400 80' preserveAspectRatio='none'><g fill='none' stroke='%23b6dfe5' stroke-opacity='0.4' stroke-width='1'><path d='M0,30 Q175,10 350,30 T700,30 T1050,30 T1400,30'/><path d='M0,50 Q175,30 350,50 T700,50 T1050,50 T1400,50'/><path d='M0,70 Q175,50 350,70 T700,70 T1050,70 T1400,70'/></g></svg>");
+    background-size: 100% 100%;
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar" id="topbar">
+  <div class="container topbar-inner">
+    <a href="/" class="brand"><span class="sigil">≈</span> SISY <span class="year">/ 2026</span></a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/program/">Program</a>
+      <a href="/venue/">Pula</a>
+      <a href="/submit/">Submit</a>
+      <a href="/contact/">Committee</a>
+    </nav>
+    <div style="display:flex; gap:12px; align-items:center;">
+      <span class="deadline-badge"><span class="dot"></span>Deadline · May 28</span>
+      <a href="https://www.easychair.org/conferences/?conf=sisy2026" target="_blank" rel="noopener" class="btn cta">Submit Paper ↗</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="nope">
+    <div class="container">
+      <div class="code">404</div>
+      <h1>Lost at <em>sea</em>.</h1>
+      <p>The page you were looking for has drifted off the chart. Head back to the home page, or browse the program, venue, and submission details from the navigation.</p>
+      <div class="actions">
+        <a href="/" class="btn solid">↺ Back to home</a>
+        <a href="/program/" class="btn">Program</a>
+        <a href="/venue/" class="btn">Pula</a>
+        <a href="/submit/" class="btn">Submit</a>
+      </div>
+    </div>
+    <div class="waves-bottom"></div>
+  </section>
+</main>
+
+<script src="/script.js"></script>
+</body>
+</html>
