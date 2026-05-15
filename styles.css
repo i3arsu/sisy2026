@@ -344,6 +344,105 @@ em, .italic { font-family: 'Fraunces', serif; font-style: italic; font-weight: 4
   z-index: 0;
 }
 .hero-seascape svg { width: 100%; height: 100%; display: block; }
+.hero-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+.hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg,
+      rgba(6, 29, 51, 0.55) 0%,
+      rgba(6, 29, 51, 0.35) 40%,
+      rgba(6, 29, 51, 0.75) 100%
+    ),
+    linear-gradient(90deg,
+      rgba(6, 29, 51, 0.45) 0%,
+      rgba(6, 29, 51, 0.1) 50%,
+      rgba(6, 29, 51, 0.0) 100%
+    );
+  pointer-events: none;
+}
+
+/* Hero SVG animations */
+#hero-sun-group {
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform, opacity;
+  animation: sunRise 1.8s cubic-bezier(0.16, 0.84, 0.32, 1) both;
+}
+#hero-reflections {
+  animation: reflRise 1.6s cubic-bezier(0.16, 0.84, 0.32, 1) 0.5s both;
+}
+#hero-waves {
+  animation: waveRise 1.4s cubic-bezier(0.16, 0.84, 0.32, 1) 0.7s both;
+}
+@keyframes sunRise {
+  0%   { transform: translate(40px, 320px) scale(0.45); opacity: 0; }
+  60%  { opacity: 1; }
+  100% { transform: translate(0, 0) scale(1); opacity: 1; }
+}
+@keyframes reflRise {
+  0%   { transform: translateY(60px); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 0.6; }
+}
+@keyframes waveRise {
+  0%   { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 1; }
+}
+.hero-rising-done #hero-sun-group { animation: none; }
+.hero-rising-done #hero-reflections { animation: none; }
+.hero-rising-done #hero-waves { animation: none; }
+#hero-sun-glow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sunBreathe 7s ease-in-out infinite;
+}
+#hero-sun-core {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sunCorePulse 5s ease-in-out infinite;
+}
+@keyframes sunBreathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.08); opacity: 0.92; }
+}
+@keyframes sunCorePulse {
+  0%, 100% { transform: scale(1); fill-opacity: 0.9; }
+  50%      { transform: scale(1.04); fill-opacity: 1; }
+}
+
+.hero-refl {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: reflShimmer 4.2s ease-in-out infinite;
+}
+.hero-refl.r1 { animation-duration: 4.2s; animation-delay: 0s; }
+.hero-refl.r2 { animation-duration: 5.0s; animation-delay: 0.3s; }
+.hero-refl.r3 { animation-duration: 4.6s; animation-delay: 0.8s; }
+.hero-refl.r4 { animation-duration: 5.4s; animation-delay: 0.5s; }
+.hero-refl.r5 { animation-duration: 4.8s; animation-delay: 1.1s; }
+@keyframes reflShimmer {
+  0%, 100% { transform: scaleX(1);    opacity: 1; }
+  50%      { transform: scaleX(0.78); opacity: 0.65; }
+}
+
+.hero-wave {
+  animation: waveDrift 9s ease-in-out infinite;
+}
+.hero-wave.w1 { animation-duration: 9s;  animation-delay: 0s; }
+.hero-wave.w2 { animation-duration: 11s; animation-delay: 0.6s; }
+.hero-wave.w3 { animation-duration: 8s;  animation-delay: 1.2s; }
+.hero-wave.w4 { animation-duration: 10s; animation-delay: 0.4s; }
+.hero-wave.w5 { animation-duration: 12s; animation-delay: 1.8s; }
+@keyframes waveDrift {
+  0%, 100% { transform: translateX(0)    translateY(0); }
+  50%      { transform: translateX(-30px) translateY(-3px); }
+}
 
 .hero-inner {
   position: relative;
@@ -411,17 +510,73 @@ em, .italic { font-family: 'Fraunces', serif; font-style: italic; font-weight: 4
 .hero-meta .row .k { color: rgba(250,245,230,0.55); }
 .hero-meta .row .v { color: var(--foam); }
 
-/* Compass top-right */
-.compass {
-  position: absolute;
-  top: 110px;
-  right: 32px;
-  width: 130px;
-  height: 130px;
-  z-index: 3;
+/* IEEE logo (navbar chip) */
+.ieee-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper);
+  padding: 5px 8px;
+  border: 1px solid var(--foam);
+  border-radius: 2px;
+  height: 30px;
+  transition: transform .2s, box-shadow .2s;
 }
-.compass svg { width: 100%; height: 100%; }
-@media (max-width: 880px) { .compass { display: none; } }
+.ieee-mark img { height: 18px; width: auto; display: block; }
+.ieee-mark:hover {
+  transform: translate(-1px,-1px);
+  box-shadow: 3px 3px 0 var(--foam);
+}
+@media (max-width: 720px) { .ieee-mark { height: 26px; padding: 4px 6px; } .ieee-mark img { height: 16px; } }
+
+/* IEEE stamp in the hero */
+.hero-ieee-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+  padding: 8px 14px 8px 8px;
+  background: rgba(6, 29, 51, 0.45);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  backdrop-filter: blur(6px);
+}
+.hero-ieee {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper);
+  padding: 6px 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.hero-ieee img { height: 24px; width: auto; display: block; }
+.hero-ieee-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  line-height: 1;
+}
+.hero-ieee-text .kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rust);
+}
+.hero-ieee-text .edition {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--foam);
+}
+@media (max-width: 720px) {
+  .hero-ieee-stamp { gap: 12px; margin-bottom: 28px; }
+  .hero-ieee img { height: 18px; }
+  .hero-ieee-text .kicker { font-size: 0.58rem; }
+  .hero-ieee-text .edition { font-size: 0.66rem; letter-spacing: 0.14em; }
+}
 
 /* Latitude marker on left side */
 .lat-marker {

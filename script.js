@@ -1,13 +1,50 @@
-// Nav scroll effect
+// Nav scroll effect + hero parallax
 const nav = document.getElementById('topbar') || document.getElementById('nav');
-const onScroll = () => {
-  if (window.scrollY > 12) nav.classList.add('scrolled');
-  else nav.classList.remove('scrolled');
-};
-if (nav) {
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+const heroSun       = document.getElementById('hero-sun-group');
+const heroReflect   = document.getElementById('hero-reflections');
+const heroWaves     = document.getElementById('hero-waves');
+const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Hero parallax only kicks in after the rise-in CSS animation finishes
+let heroRiseDone = prefersReduce; // if reduced motion, no rise animation runs
+if (heroSun && !heroRiseDone) {
+  heroSun.addEventListener('animationend', () => {
+    heroRiseDone = true;
+    document.body.classList.add('hero-rising-done');
+  }, { once: true });
+  // Safety fallback in case animationend doesn't fire
+  setTimeout(() => {
+    if (!heroRiseDone) {
+      heroRiseDone = true;
+      document.body.classList.add('hero-rising-done');
+    }
+  }, 2400);
 }
+
+let ticking = false;
+const updateScroll = () => {
+  const y = window.scrollY;
+  if (nav) {
+    if (y > 12) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }
+  if (heroRiseDone && !prefersReduce && (heroSun || heroReflect || heroWaves)) {
+    const t = Math.min(y / 800, 1);
+    if (heroSun)     heroSun.style.transform     = `translate(${-t * 40}px, ${t * 140}px) scale(${1 - t * 0.18})`;
+    if (heroReflect) heroReflect.style.transform = `translateY(${t * 70}px)`;
+    if (heroWaves)   heroWaves.style.transform   = `translateY(${t * 40}px)`;
+    if (heroSun)     heroSun.style.opacity       = `${1 - t * 0.45}`;
+  }
+  ticking = false;
+};
+const onScroll = () => {
+  if (!ticking) {
+    requestAnimationFrame(updateScroll);
+    ticking = true;
+  }
+};
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
 // Mobile menu
 const menuToggle = document.getElementById('menuToggle');
