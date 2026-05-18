@@ -48,11 +48,15 @@ onScroll();
 
 // Mobile menu
 const menuToggle = document.getElementById('menuToggle');
+const setMenu = (open) => {
+  nav.classList.toggle('open', open);
+  menuToggle?.setAttribute('aria-expanded', String(open));
+};
 menuToggle?.addEventListener('click', () => {
-  nav.classList.toggle('open');
+  setMenu(!nav.classList.contains('open'));
 });
 document.querySelectorAll('.nav-links a').forEach(a =>
-  a.addEventListener('click', () => nav.classList.remove('open'))
+  a.addEventListener('click', () => setMenu(false))
 );
 
 // Reveal on scroll

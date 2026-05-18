@@ -27,7 +27,7 @@
       <span class="sigil">≈</span>
       SISY <span class="year">/ 2026</span>
     </a>
-    <nav class="nav-links">
+    <nav class="nav-links" id="primary-nav">
       <a href="./" class="active">Home</a>
       <a href="program/">Program</a>
       <a href="venue/">Pula</a>
@@ -40,7 +40,9 @@
       <a href="https://www.ieee.org" target="_blank" rel="noopener" class="ieee-mark" aria-label="IEEE">
         <img src="assets/ieee.svg" alt="IEEE" />
       </a>
-      <button class="menu-toggle" id="menuToggle">Menu</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav">
+        <span class="bars" aria-hidden="true"></span>
+      </button>
     </div>
   </div>
 </header>
